@@ -15,6 +15,8 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/postgres:9.4
 
+      - image: selenium/standalone-chrome
+
     working_directory: ~/myproject
 
     steps:
