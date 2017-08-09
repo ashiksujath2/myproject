@@ -48,6 +48,8 @@ jobs:
           command: |
             . venv/bin/activate
             python manage.py test
+            python manage.py runserver 8000
+            python manage.py run_selenium_tests
 
       - store_artifacts:
           path: test-reports

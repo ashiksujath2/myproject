@@ -2,7 +2,6 @@ import time
 from django.test import TestCase
 from django.test import LiveServerTestCase
 from selenium import webdriver
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from django.contrib.auth.models import User
 
 
@@ -27,6 +26,7 @@ class AdminTestCase(LiveServerTestCase):
     def test_login(self):
         username = "admin"
         password = "password123"
+        print("\nlive url: ", self.live_server_url)
         self.driver.get('%s%s' % (self.live_server_url, '/admin/'))
         username_field = self.driver.find_element_by_name("username")
         username_field.send_keys(username)
