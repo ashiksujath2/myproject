@@ -18,13 +18,7 @@ class SimpleTest(TestCase):
 class AdminTestCase(LiveServerTestCase):
 
     def setUp(self):
-        try:
-            self.driver = webdriver.Remote(
-                command_executor='http://127.0.0.1:4444/wd/hub',
-                desired_capabilities=DesiredCapabilities.CHROME)
-        except Exception as e:
-            print(e)
-            self.driver = webdriver.Chrome()
+        self.driver = webdriver.Chrome()
         User.objects.create_superuser('admin', 'foo@bar.com', 'password123')
 
     def tearDown(self):
