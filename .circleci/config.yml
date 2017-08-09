@@ -48,12 +48,12 @@ jobs:
           command: |
             . venv/bin/activate
             python manage.py test
+            python manage.py migrate
 
       - run:
           name: run server
           command: |
             . venv/bin/activate
-            python manage.py migrate
             python manage.py runserver 8000
           background: true
 
