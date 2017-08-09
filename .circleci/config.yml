@@ -55,6 +55,7 @@ jobs:
             . venv/bin/activate
             python manage.py migrate
             python manage.py runserver 8000
+          background: true
 
       - run:
           name: run test
