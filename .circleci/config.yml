@@ -9,12 +9,14 @@ jobs:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.6.1
+      - image: circleci/python:3.6.1-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/postgres:9.4
+
+      - image: selenium/standalone-chrome
 
     working_directory: ~/myproject
 
@@ -31,9 +33,6 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            wget https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip
-            unzip chromedriver_linux64.zip
-            sudo cp chromedriver /usr/local/bin/chromedriver
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
