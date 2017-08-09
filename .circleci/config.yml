@@ -2,12 +2,6 @@
 #
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
-dependencies:
-    override:
-        # new chromedriver
-        - wget https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip
-        - unzip chromedriver_linux64.zip
-        - sudo cp chromedriver /usr/local/bin/chromedriver
 
 version: 2
 jobs:
@@ -37,6 +31,9 @@ jobs:
       - run:
           name: install dependencies
           command: |
+            wget https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip
+            unzip chromedriver_linux64.zip
+            sudo cp chromedriver /usr/local/bin/chromedriver
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
