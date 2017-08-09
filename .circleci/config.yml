@@ -44,14 +44,22 @@ jobs:
 
       # run tests!
       - run:
-          name: run tests
+          name: run unittests
           command: |
             . venv/bin/activate
             python manage.py test
+
+      - run:
+          name: run server
+          command: |
+            . venv/bin/activate
+            python manage.py migrate
             python manage.py runserver 8000
+
+      -run:
+          name: run test
+          command: |
+            . venv/bin/activate
             python manage.py run_selenium_tests
 
-      - store_artifacts:
-          path: test-reports
-          destination: test-reports
 
