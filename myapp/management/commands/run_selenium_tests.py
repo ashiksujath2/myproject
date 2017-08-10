@@ -15,6 +15,6 @@ class Command(BaseCommand):
         password_field = self.driver.find_element_by_name("password")
         password_field.send_keys("password")
         time.sleep(2)
-        assert username_field.get_attribute('maxlength') == '255'
+        assert username_field.get_attribute('maxlength') == '254'
         self.driver.quit()
         print("\nDone!")
