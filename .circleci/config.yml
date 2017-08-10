@@ -7,15 +7,7 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
       - image: circleci/python:3.6.1-browsers
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
       - image: selenium/standalone-chrome
 
     working_directory: ~/myproject
@@ -23,7 +15,6 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "requirements.txt" }}
@@ -54,7 +45,7 @@ jobs:
           name: run server
           command: |
             . venv/bin/activate
-            python manage.py runserver 8000
+            gunicorn myproject.wsgi:application --bind=127.0.0.1:8000 --pid=gunicorn.txt --daemon
           background: true
 
       - run:
@@ -62,5 +53,6 @@ jobs:
           command: |
             . venv/bin/activate
             python manage.py run_selenium_tests
+            kill -9 `cat gunicorn.txt`
 
 
