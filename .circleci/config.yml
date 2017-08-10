@@ -42,14 +42,14 @@ jobs:
             python manage.py migrate
 
       - run:
-          name: run server
+          name: run server in background
           command: |
             . venv/bin/activate
             gunicorn myproject.wsgi:application --bind=127.0.0.1:8000 --pid=gunicorn.txt --daemon
           background: true
 
       - run:
-          name: run test
+          name: run selenium test
           command: |
             . venv/bin/activate
             python manage.py run_selenium_tests
